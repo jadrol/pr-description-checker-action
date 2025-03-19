@@ -1,6 +1,6 @@
 module github.com/jadrol/pr-description-checker-action
 
-go 1.17
+go 1.23
 
 require (
 	github.com/google/go-github/v42 v42.0.0
