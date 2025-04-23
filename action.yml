@@ -27,7 +27,19 @@ runs:
   using: composite
   steps:
     - shell: bash
-      run: $GITHUB_ACTION_PATH/bin/description-checker
+      id: determine-arch
+      run: |
+        if [[ "$(uname -m)" == "x86_64" ]]; then
+          echo "ARCH=amd64" >> $GITHUB_OUTPUT
+        elif [[ "$(uname -m)" == "aarch64" ]]; then
+          echo "ARCH=arm64" >> $GITHUB_OUTPUT
+        else
+          echo "Unsupported architecture"
+          exit 1
+        fi
+
+    - shell: bash
+      run: $GITHUB_ACTION_PATH/bin/description-checker-${{ steps.determine-arch.outputs.ARCH }}
       env:
         INPUT_PR-NUMBER: ${{ github.event.number }}
         INPUT_REPO-OWNER: ${{ github.event.repository.owner.login }}
