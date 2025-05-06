@@ -89,7 +89,11 @@ func main() {
 
 	githubClient := newGithubClient(cfg.githubToken)
 
-	pr, _, _ := githubClient.PullRequests.Get(context.Background(), cfg.repoOwner, cfg.repoName, cfg.prNumber)
+	pr, _, err := githubClient.PullRequests.Get(context.Background(), cfg.repoOwner, cfg.repoName, cfg.prNumber)
+
+	if err != nil {
+		githubactions.Fatalf("Failed to get PR: %s", err)
+	}
 
 	skipCheck := false
 	for _, label := range pr.Labels {
