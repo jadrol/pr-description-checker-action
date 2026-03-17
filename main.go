@@ -13,7 +13,7 @@ import (
 )
 
 var (
-	markdownCommentRegex = regexp.MustCompile(`\<\!\-\-\-.*\-\-\>`)
+	markdownCommentRegex = regexp.MustCompile(`(?s)<!--.*?-->`)
 )
 
 type config struct {
@@ -133,7 +133,7 @@ func main() {
 			}
 		}
 
-		githubactions.Fatalf(errorMsg)
+		githubactions.Fatalf("%s", errorMsg)
 	}
 
 	githubactions.Infof("Description is valid")
