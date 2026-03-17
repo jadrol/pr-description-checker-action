@@ -15,7 +15,9 @@ var _ = Describe("Main", func() {
 			Entry("Blank input", "", ""),
 			Entry("Plain text input", "Hello world", "Hello world"),
 			Entry("Markdown input without comments", "**Hello world**\n\n* test\n*test2", "**Hello world**\n\n* test\n*test2"),
-			Entry("Markdown with comments", "**Hello world**\n\n<!--- remove this if no breaking changes -->", "**Hello world**"),
+			Entry("Markdown with single-line comments", "**Hello world**\n\n<!-- remove this if no breaking changes -->", "**Hello world**"),
+			Entry("Markdown with multiline comments", "## Description\n<!-- line 1\nline 2\nline 3 -->\nFilled in", "## Description\n\nFilled in"),
+			Entry("Markdown with template comments", "## Requestor/Issue\n<!-- Example with ticket: INFRA-1234 -->\nINFRA-6046", "## Requestor/Issue\n\nINFRA-6046"),
 		)
 	})
 })

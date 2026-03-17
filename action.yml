@@ -12,7 +12,7 @@ inputs:
     default: "./.github/PULL_REQUEST_TEMPLATE.md"
   comment:
     description: Whether to add comment to PR
-    default: true
+    default: "true"
   comment-empty-description:
     description: Comment to use when empty description
     default: PR description is empty, please add some valid description
